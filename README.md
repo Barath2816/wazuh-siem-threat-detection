@@ -168,9 +168,8 @@ Investigation
 
 ---
 
-## Detection Workflow
 
-1. ## Custom Detection Rules
+## Custom Detection Rules
 
 Rule ID    Purpose
 
@@ -183,6 +182,8 @@ Rule ID    Purpose
 100501     Trigger Active Response
 
 ---
+
+
 
 ## Sample Attacks 
 
@@ -219,7 +220,10 @@ Timestamp
 2026-10-12 19:13
 
 
+
+
 ## Screenshots
+
 
 ### Dashboard
 <img width="1852" height="776" alt="Screenshot 2026-09-19 175850" src="https://github.com/user-attachments/assets/30764d7f-2d1c-4d07-b0cd-f34a2f6ffdf0" />
@@ -239,6 +243,8 @@ Timestamp
 
 ---
 
+
+
 ## Real World Use Cases
 
 • Detect reconnaissance before exploitation
@@ -250,6 +256,8 @@ Timestamp
 • Support SOC analysts during investigations
 
 • Demonstrate custom SIEM detection engineering
+
+
 
 ## MITRE ATT&CK Mapping
 
@@ -274,6 +282,8 @@ Automate incident response playbooks.
 
 ---
 
+
+
 ## Author
 
 Barath P
@@ -282,6 +292,8 @@ Barath P
 Cyber Security Enthusiast
 
 ---
+
+
 
 ## License
 
