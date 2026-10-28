@@ -1,4 +1,4 @@
-<group name="local,mac_monitor,">
+<group name="local,mac_monitor,mac_investigation,json,nmap">
 
   <rule id="100500" level="10">
     <decoded_as>mac_monitor</decoded_as>
@@ -9,33 +9,57 @@
     </mitre>
   </rule>
 
-</group>
-
-<group name="mac_investigation,json">
-
   <rule id="100510" level="8">
     <decoded_as>json</decoded_as>
     <field name="event">MAC_INVESTIGATION</field>
-
     <description>MAC Investigation Report Generated</description>
-
     <group>mac_monitor,investigation,forensics</group>
-
     <mitre>
       <id>T1036</id>
     </mitre>
   </rule>
 
-<rule id="100515" level="10">
+
+  <rule id="100515" level="10">
     <if_sid>100500</if_sid>
-
     <description>MAC Address Changed</description>
+    <group>mac_spoofing,security_event</group>
+    <mitre>
+      <id>T1036</id>
+    </mitre>
+  </rule>
 
-    <group>mac_spoofing,security_event,</group>
+
+  <rule id="150166" level="6">
+    <match>NMAP_SCAN_DETECT</match>
+    <description>
+      Nmap scan detected from $(srcip) to $(dstip)
+      (Destination Port: $(dstport))
+    </description>
+    <mitre>
+      <id>T1046</id>
+    </mitre>
+    <group>firewall,nmap,reconnaissance,attack,network</group>
+  </rule>
+
+  <rule id="100101"
+        level="12"
+        frequency="20"
+        timeframe="10">
+
+    <if_matched_sid>100100</if_matched_sid>
+    <same_source_ip />
+
+    <description>
+      Possible Nmap Port Scan detected from $(srcip)
+    </description>
 
     <mitre>
-        <id>T1036</id>
+      <id>T1046</id>
     </mitre>
-</rule>
+
+    <group>nmap,reconnaissance,attack,network</group>
+
+  </rule>
 
 </group>
