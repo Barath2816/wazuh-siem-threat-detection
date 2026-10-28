@@ -238,7 +238,8 @@ Timestamp
 
 
 ### Architecture
-<img width="940" height="1015" alt="image" src="https://github.com/user-attachments/assets/79257675-78a4-40e5-98ad-57465185e2bb" />
+<img width="1223" height="1286" alt="Wazuh SIEM Custom Detection Lab Workflow" src="https://github.com/user-attachments/assets/d4fe05ef-80b6-42ed-bcbb-0f26140c70a8" />
+
 
 
 ---
