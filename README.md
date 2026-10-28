@@ -1,45 +1,93 @@
-# Wazuh MAC Address Change Detection
+# Wazuh SIEM Custom Detection Lab
 
 ## Overview
-This project is a Security Information and Event Management (SIEM) solution developed using Wazuh to detect unauthorized MAC address changes in real time. It monitors network interfaces, generates structured JSON logs, detects MAC spoofing through custom Wazuh rules, executes active responses, sends email notifications, and visualizes alerts on the Wazuh Dashboard.
+This project demonstrates a custom Wazuh SIEM deployment for endpoint security monitoring. It includes custom detection rules for unauthorized MAC address changes and Nmap port scan detection, along with real-time alerting, active response, dashboard visualization, and email notifications.
 
 ---
 
 ## Features
 
-- Real-time MAC address monitoring
-- Detects MAC address spoofing
-- Generates JSON security events
-- Custom Wazuh detection rules
-- Active Response to restore original MAC address
-- Email notifications using Postfix
-- Dashboard visualization
-- MITRE ATT&CK mapping
-- Investigation report generation
+- Real-time endpoint monitoring
+
+✔ MAC address spoofing detection
+
+✔ Nmap port scan detection
+
+✔ Custom Wazuh detection rules
+
+✔ JSON and Journald log collection
+
+✔ Dashboard visualization
+
+✔ MITRE ATT&CK mapping
+
+✔ Email notifications
+
+✔ Active Response (MAC restoration)
+
+✔ Custom XML rule development
+
+✔ Security event investigationReal-time endpoint monitoring
+
+✔ MAC address spoofing detection
+
+✔ Nmap port scan detection
+
+✔ Custom Wazuh detection rules
+
+✔ JSON and Journald log collection
+
+✔ Dashboard visualization
+
+✔ MITRE ATT&CK mapping
+
+✔ Email notifications
+
+✔ Active Response (MAC restoration)
+
+✔ Custom XML rule development
+
+✔ Security event investigation
 
 ---
 
 ## Architecture
 
 ```
-Attacker
-    │
-    ▼
-Kali Linux (Agent)
-    │
-mac_monitor.py
-    │
-JSON Log
-    │
-Wazuh Agent
-    │
-Ubuntu Wazuh Manager
-    │
-Custom Rules
-    │
- ┌──────────────┬──────────────┐
- ▼              ▼              ▼
-Dashboard   Email Alert   Active Response
+                    Attacker (Nmap)
+
+                           │
+                           ▼
+
+                 Kali Linux (Agent)
+
+            ┌──────────────┴──────────────┐
+
+            ▼                             ▼
+
+      MAC Monitor                  iptables Logs
+
+      (Python JSON)             (Kernel Journald)
+
+            ▼                             ▼
+
+          Wazuh Agent (Log Collection)
+
+                    ▼
+
+          Ubuntu Wazuh Manager
+
+                    ▼
+
+         Custom XML Detection Rules
+
+                    ▼
+
+        ┌────────┬─────────┬──────────┐
+
+        ▼        ▼         ▼          ▼
+
+   Dashboard   Email   Active Response  MITRE Mapping
 ```
 
 ---
@@ -47,15 +95,19 @@ Dashboard   Email Alert   Active Response
 ## Technologies Used
 
 | Technology | Purpose |
-|------------|---------|
-| Wazuh 4.14 | SIEM Platform |
-| Ubuntu Server | Wazuh Manager |
-| Kali Linux | Monitoring Agent |
-| Python 3 | MAC Monitoring Script |
-| Bash | Active Response Scripts |
-| Postfix | Email Notifications |
-| OpenSearch Dashboard | Visualization |
-| macchanger | MAC Address Spoofing Test |
+|------------|----------|
+| Wazuh | SIEM |
+| Ubuntu | Manager |
+| Kali | Agent |
+| Python | MAC Detection |
+| Bash | Active Response |
+| XML | Custom Rules |
+| JSON | Log Generation |
+| iptables | Scan Logging |
+| journald | Kernel Logs |
+| Nmap | Attack Simulation |
+| Postfix | Email Alerts |
+| VirtualBox | Lab |
 
 ---
 
@@ -75,22 +127,97 @@ Wazuh-MAC-Address-Change-Detection/
 ├── requirements.txt
 └── .gitignore
 ```
+## Nmap Detection
+
+```
+Attacker runs Nmap
+
+↓
+
+iptables logs SYN packets
+
+↓
+
+Kernel Journald
+
+↓
+
+Wazuh Agent
+
+↓
+
+Manager
+
+↓
+
+Custom XML Rules
+
+↓
+
+Dashboard Alert
+
+↓
+
+MITRE T1046
+
+↓
+
+Investigation
+
+```
 
 ---
 
 ## Detection Workflow
 
-1. Read the current MAC address.
-2. Compare it with the previous MAC address.
-3. Detect unauthorized MAC address changes.
-4. Generate a JSON investigation log.
-5. Wazuh Agent collects the log.
-6. Wazuh Manager applies custom rules.
-7. Alert is displayed on the dashboard.
-8. Email notification is sent.
-9. Active Response restores the original MAC address.
+1. ## Custom Detection Rules
+
+Rule ID    Purpose
+
+100100     Detect Nmap scan
+
+100101     Detect high-frequency port scan
+
+100500     Detect MAC address change
+
+100501     Trigger Active Response
 
 ---
+
+## Sample Attacks 
+
+Rule ID: 100101
+
+Level: 12
+
+Description:
+
+Possible Nmap Port Scan detected from 192.168.56.108
+
+MITRE
+
+T1046
+
+Source IP
+
+192.168.56.108
+
+Destination IP
+
+192.168.56.107
+
+Protocol
+
+TCP
+
+Destination Port
+
+6901
+
+Timestamp
+
+2026-10-12 19:13
+
 
 ## Screenshots
 
@@ -112,14 +239,38 @@ Wazuh-MAC-Address-Change-Detection/
 
 ---
 
+## Real World Use Cases
+
+• Detect reconnaissance before exploitation
+
+• Detect MAC spoofing inside enterprise networks
+
+• Monitor endpoint activity using Wazuh
+
+• Support SOC analysts during investigations
+
+• Demonstrate custom SIEM detection engineering
+
+## MITRE ATT&CK Mapping
+
+Technique
+
+T1046
+
+Network Service Discovery
+
+Used to detect reconnaissance through Nmap scanning.
+
+
 ## Future Enhancements
 
-- Device profiling
-- Vendor lookup API
-- Threat intelligence integration
-- Slack/Teams notifications
-- Multi-agent monitoring
-- Machine learning anomaly detection
+Detect UDP, ACK, FIN, NULL, and Xmas scans.
+Integrate Suricata IDS alerts.
+Add GeoIP enrichment for external attackers.
+Integrate VirusTotal and AbuseIPDB.
+Send alerts to Slack or Microsoft Teams.
+Create custom Wazuh dashboards.
+Automate incident response playbooks.
 
 ---
 
