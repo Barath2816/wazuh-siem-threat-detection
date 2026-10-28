@@ -7,7 +7,7 @@ This project demonstrates a custom Wazuh SIEM deployment for endpoint security m
 
 ## Features
 
-- Real-time endpoint monitoring
+✔ Real-time endpoint monitoring
 
 ✔ MAC address spoofing detection
 
