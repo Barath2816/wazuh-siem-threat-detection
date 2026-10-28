@@ -43,3 +43,19 @@
     <regex>New MAC\s+:\s+(\S+)</regex>
     <order>new_mac</order>
 </decoder>
+
+<decoder name="nmap_scan_detect">
+    <prematch>NMAP_SCAN_DETECT:</prematch>
+</decoder>
+
+<decoder name="nmap_scan_fields">
+    <parent>nmap_scan_detect</parent>
+
+    <regex>
+SRC=(\S+)\sDST=(\S+).*PROTO=(\S+)\sSPT=(\d+)\sDPT=(\d+)
+    </regex>
+
+    <order>
+srcip,dstip,protocol,srcport,dstport
+    </order>
+</decoder>
